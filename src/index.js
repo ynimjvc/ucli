@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 const EventEmitter = require('events');
 const {version} = require('../package.json');
 

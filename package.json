@@ -1,22 +1,9 @@
 {
-  "name": "ucli",
+  "name": "modcli",
   "version": "0.0.1",
-  "bin": {
-    "ecli": "src/index.js"
-  },
   "main": "src/index.js",
   "author": "Vadim Korelin",
   "license": "MIT",
-  "dependencies": {
-    "inquirer": "^7.3.3",
-    "mustache": "^4.0.1",
-    "publish": "^0.6.0",
-    "yaml": "^1.10.0",
-    "yargs": "^16.1.1"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ynimjvc/ucli.git"
