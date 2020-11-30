@@ -11,6 +11,7 @@
   "author": "Vadim Korelin",
   "license": "MIT",
   "dependencies": {
+    "modcli": "0.0.2",
     "yargs": "^16.1.1"
   }
 }

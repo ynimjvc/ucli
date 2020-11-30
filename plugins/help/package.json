@@ -9,5 +9,8 @@
     "url": "git+https://github.com/ynimjvc/ucli.git"
   },
   "author": "Vadim Korelin",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "modcli": "0.0.2"
+  }
 }

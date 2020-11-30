@@ -1,4 +1,7 @@
 const {plugin} = require('../index');
+const params = require('modcli-params');
+
+params();
 
 module.exports = routing => {
 
