@@ -1,6 +1,6 @@
 {
   "name": "modcli-actionrouter",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "src/index.js",
   "homepage": "https://github.com/ynimjvc/ucli#readme",
@@ -11,7 +11,6 @@
   "author": "Vadim Korelin",
   "license": "MIT",
   "dependencies": {
-    "modcli": "0.0.2",
-    "modcli-params": "^1.0.0"
+    "modcli": "0.0.2"
   }
 }

@@ -1,7 +1,4 @@
-const {plugin} = require('../index');
-const params = require('modcli-params');
-
-params();
+const {plugin} = require('modcli');
 
 module.exports = routing => {
 
@@ -18,11 +15,7 @@ module.exports = routing => {
         ({on, dispatch}) => {
 
             on('start', context => {
-                if (!context.plugins('params')) {
-                    throw new Error('action-router requires params plugin');
-                }
-
-                const {params: {action}} = context;
+                const action = process.argv[2];
 
                 if (routing[action]) {
                     dispatch(routing[action]);
