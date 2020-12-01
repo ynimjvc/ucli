@@ -3,7 +3,6 @@ const path = require('path');
 const {plugin} = require('modcli');
 
 module.exports = (name = 'modclirc.json') => {
-
     plugin(
         'configrc',
         ({on}) => {

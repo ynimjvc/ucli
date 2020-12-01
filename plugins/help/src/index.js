@@ -1,4 +1,4 @@
-const {plugin} = require('../index');
+const {plugin} = require('modcli');
 
 module.exports = () => plugin(
     'help',

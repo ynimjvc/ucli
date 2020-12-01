@@ -1,5 +1,5 @@
 const yargs = require('yargs/yargs');
-const {plugin} = require('../index');
+const {plugin} = require('modcli');
 
 const {argv: {
     $0,
@@ -17,6 +17,6 @@ module.exports = () => plugin(
                 ...rest
             };
         });
-        
+
     }
 );
