@@ -2,10 +2,10 @@ const fs = require('fs');
 const path = require('path');
 const {plugin} = require('modcli');
 
-module.exports = (name = 'modcli.json') => {
+module.exports = (name = 'modclirc.json') => {
 
     plugin(
-        'config-json',
+        'configrc',
         ({on}) => {
 
             on('start', context => {
