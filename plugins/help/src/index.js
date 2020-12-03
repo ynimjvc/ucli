@@ -1,31 +1,29 @@
-const {plugin} = require('modcli');
+module.exports = flow => {
 
-module.exports = () => plugin(
-    'help',
-    ({on}) => {
+    flow.describe('help', 'prints formatted descriptions of all registered plugins');
 
-        on('help', context => {
+    flow.on('help', context => {
 
-            const plugins = context.plugins();
-            const firstColumnLength = plugins.reduce((result, [name]) => (name.length > result) ? name.length : result, 0);
+        const firstColumnLength = flow.plugins
+            .reduce((result, [name]) => (name.length > result) ? name.length : result, 0);
 
-            const content = plugins
-                .map(([name, description]) => {
+        const content = flow.plugins
+            .map(([name, description]) => {
 
 
-                    const descriptionLines = (description || '').split('\n');
+                const descriptionLines = (description || '').split('\n');
 
-                    return descriptionLines
-                        .map((line, index) => index
-                            ? `${' '.repeat(firstColumnLength)}\t\t${line}`
-                            : `${name.padEnd(firstColumnLength, ' ')}\t\t${line}`)
-                        .join('\n');
-                })
-                .join('\n');
+                return descriptionLines
+                    .map((line, index) => index
+                        ? `${' '.repeat(firstColumnLength)}\t\t${line}`
+                        : `${name.padEnd(firstColumnLength, ' ')}\t\t${line}`)
+                    .join('\n');
+            })
+            .join('\n\n');
 
-            process.stdout.write(content);
+        process.stdout.write('\033c');
+        process.stdout.write(content);
 
-        });
+    });
 
-    }
-);
+};

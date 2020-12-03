@@ -1,6 +1,4 @@
-const {plugin} = require('modcli');
-
-module.exports = routing => {
+module.exports = routing => flow => {
 
     if (!routing || 'object' !== typeof routing) {
         throw new Error('routing object should be provided');
@@ -10,23 +8,15 @@ module.exports = routing => {
         throw new Error('routing object should contain at least 1 route');
     }
 
-    plugin(
-        'action-router',
-        ({on, dispatch}) => {
+    flow.describe('action-router', 'simple router, uses first argument and routing config to emit event when argument is present');
 
-            on('start', context => {
-                const action = process.argv[2];
+    const action = process.argv[2];
 
-                if (routing[action]) {
-                    dispatch(routing[action]);
-                } else if (routing.defaulf) {
-                    dispatch(routing.defaulf);
-                } else {
-                    dispatch(Object.values(routing)[0]);
-                }
-
-            });
-
-        }
-    );
+    if (routing[action]) {
+        flow.dispatch(routing[action]);
+    } else if (routing.defaulf) {
+        flow.dispatch(routing.defaulf);
+    } else {
+        flow.dispatch(Object.values(routing)[0]);
+    }
 };

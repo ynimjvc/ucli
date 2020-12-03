@@ -1,24 +1,16 @@
 const fs = require('fs');
 const path = require('path');
-const {plugin} = require('modcli');
 
-module.exports = (name = 'modclirc.json') => {
-    plugin(
-        'configrc',
-        ({on}) => {
+module.exports = (name = 'modclirc.json') => flow => {
 
-            on('start', context => {
-                const configPath = path.resolve(process.cwd(), name);
-                if (fs.existsSync(configPath)) {
-                    const raw = fs.readFileSync(configPath, 'utf8');
-                    context.config = JSON.parse(raw);
-                } else {
-                    throw new Error(`can't find ${name}`);
-                }
-            });
+    flow.describe('configrc', 'pulls configuration from .modclirc file and stores it to context.config');
 
-            return 'Pulls configuration from .modclirc file';
-
-        }
-    );
+    const configPath = path.resolve(process.cwd(), name);
+    if (fs.existsSync(configPath)) {
+        const raw = fs.readFileSync(configPath, 'utf8');
+        flow.context.config = JSON.parse(raw);
+    } else {
+        throw new Error(`can't find ${name}`);
+    }
+    
 };

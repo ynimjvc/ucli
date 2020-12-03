@@ -1,5 +1,5 @@
 # modcli
----
+work in progress
 
 ## Installation
 
@@ -8,59 +8,72 @@
 ## Getting started
 
 ```javascript
-const {app} = require('modcli');
+const flow = require('modcli');
 
-app();
-```
+flow()
+    .use(flow => {
+        flow.describe('key', 'description');
 
-## Plugins
-
-### Events
-
-- `start` - emitted when app is started
-
-### Using plugins
-
-```javascript
-const {app} = require('modcli');
-const router = require('modcli-actionrouter');
-
-router({
-    default: 'done'
-});
-
-app();
-```
-
-### Write your own
-
-```javascript
-const {plugin} = require('modcli');
-
-module.exports = plugin(
-    'myPlugin',
-    ({on, dispatch}) => {
-
-        on('start', context => {    
-            context.hello = 'world';
+        flow.on('event', context => {
+            console.log(context);
         });
 
-        dispatch('some event');
+        flow.dispatch('event');
+    })
+```
 
-        return 'my plugin description';
-    }
-);
+## Flow
+
+### Properties
+
+#### Version
+
+```
+flow.version
+```
+
+#### Plugins
+
+```
+flow.plugins
 ```
 
 #### Context
 
-* version - function, returns current modcli version
-```javascript
-console.log(context.version()); //0.0.0
+```
+flow.context
 ```
 
-* plugins - returns plugin or list of all plugins that was registered
-```javascript
-console.log(context.plugins('foo')); // ['pluginName', function() {}]
-console.log(context.plugins());      // [['pluginName', function() {}], ...]
+### Methods
+
+#### Describe
+
+```
+flow.describe(name, value)
+```
+
+Use this to describe any new features you added.
+
+One describe per feature.
+
+Underneath its jus a javascript Map and can be accessed on flow.
+
+Use `flow.getDescription(key)` for getting value for specific key or `flow.plugins` for getting all registered descriptions.
+
+#### Use
+
+```
+flow.use(callback)
+```
+
+#### On
+
+```
+flow.on(eventName, callback)
+```
+
+#### Dispatch
+
+```
+flow.dispatch(eventName)
 ```
