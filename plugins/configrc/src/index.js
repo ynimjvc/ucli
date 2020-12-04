@@ -10,7 +10,7 @@ module.exports = (name = 'modclirc.json') => flow => {
         const raw = fs.readFileSync(configPath, 'utf8');
         flow.context.config = JSON.parse(raw);
     } else {
-        throw new Error(`can't find ${name}`);
+        flow.context.config = null;
     }
-    
+
 };
