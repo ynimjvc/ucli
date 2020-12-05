@@ -1,5 +1,5 @@
-module.exports = bus => (flow, name) => {
-    process.nextTick(() => bus.emit(name));
+module.exports = bus => (flow, name, ...args) => {
+    bus.emit(name, ...args);
 
     return flow;
 };
