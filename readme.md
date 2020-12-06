@@ -20,6 +20,11 @@ flow()
 
         flow.dispatch('event', 'foo', 'bar');
     })
+    .dispatch('event', 'foo', 'bar')
+    .describe('key', 'description')
+    .on('event', (...args) => {
+        console.log(args);
+    });
 ```
 
 ## Flow
