@@ -14,12 +14,17 @@ flow()
     .use(flow => {
         flow.describe('key', 'description');
 
-        flow.on('event', context => {
-            console.log(context);
+        flow.on('event', (...args) => {
+            console.log(args);
         });
 
-        flow.dispatch('event');
+        flow.dispatch('event', 'foo', 'bar');
     })
+    .dispatch('event', 'foo', 'bar')
+    .describe('key', 'description')
+    .on('event', (...args) => {
+        console.log(args);
+    });
 ```
 
 ## Flow
