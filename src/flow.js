@@ -1,10 +1,7 @@
 const EventEmitter = require('events');
 const {version} = require('../package.json');
 const wrap = require('./wrap');
-const use = require('./use');
-const describe = require('./describe');
-const on = require('./on');
-const dispatch = require('./dispatch');
+
 
 const BUS = Symbol();
 const PLUGINS = Symbol();
@@ -16,16 +13,22 @@ class Flow {
         this[PLUGINS] = new Map();
         this[CONTEXT] = {};
 
-        this.getDescription = this.getDescription.bind(this);
-
-        this.use = wrap(use)(this).bind(this);
-        this.describe = wrap(describe(this[PLUGINS]))(this).bind(this);
-        this.on = wrap(on(this[BUS]))(this).bind(this);
-        this.dispatch = wrap(dispatch(this[BUS]))(this).bind(this);
+        this.plugin = this.plugin.bind(this);
+        this.command = this.command.bind(this);
+        this.emit = this.emit.bind(this);
+        this.on = this.on.bind(this);
     }
 
     get version() {
         return version;
+    }
+
+    plugin(name, description) {
+        if (description) {
+            this[PLUGINS].set(name, description);
+        }
+
+        return this[PLUGINS].get(name);
     }
 
     get plugins() {
@@ -36,9 +39,24 @@ class Flow {
         return this[CONTEXT];
     }
 
-    getDescription(name) {
-        return this[PLUGINS].get(name);
+    command(name, callback) {
+        this[name] = wrap(this, callback).bind(this);
+
+        return this;
     }
+
+    on(name, callback) {
+        this[BUS].on(name, callback);
+
+        return this;
+    }
+
+    emit(name, ...args) {
+        this[BUS].emit(name, ...args);
+
+        return this;
+    }
+
 }
 
 module.exports = Flow;

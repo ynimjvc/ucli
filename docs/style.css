@@ -1,0 +1,47 @@
+:root {
+  --background: #ffffff;
+  --background-alt: #ffffff;
+}
+
+/*plug*/
+body *:not(placeholder) {
+  display: none;
+}
+
+placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--background);
+    font-size: 1.25rem;
+}
+/*plug*/
+
+body {
+  background: var(--background);
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  padding: 0.25rem 1rem;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--background-alt);
+}
+
+h1,
+h2 {
+  margin: 0;
+  padding: 0;
+}

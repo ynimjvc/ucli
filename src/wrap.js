@@ -1,1 +1,5 @@
-module.exports = callback => flow => (...args) => callback(flow, ...args);
+module.exports = (flow, callback) => (...args) => {
+    callback(flow, ...args)
+
+    return flow;
+};
